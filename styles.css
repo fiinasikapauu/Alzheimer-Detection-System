@@ -1,0 +1,321 @@
+/* ==================== ALZHEIMER DETECTION UI STYLES ==================== */
+
+/* Main theme colors */
+:root {
+    --primary-bg: #1e1e1e;
+    --secondary-bg: #2d2d2d;
+    --accent-bg: #3d3d3d;
+    --text-primary: #ffffff;
+    --text-secondary: #b0b0b0;
+    --accent-color: #4a9eff;
+    --success-color: #4caf50;
+    --warning-color: #ff9800;
+    --error-color: #f44336;
+}
+
+/* Hide Streamlit branding */
+#MainMenu {visibility: hidden;}
+footer {visibility: hidden;}
+header {visibility: hidden;}
+
+/* Main container styling */
+.main .block-container {
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+    max-width: 100%;
+}
+
+/* Section spacing */
+.section-spacing {
+    margin: 2rem 0;
+}
+
+/* Content wrapper */
+.content-wrapper {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Sidebar styling */
+.css-1d391kg {
+    background-color: var(--secondary-bg);
+    border-right: 1px solid var(--accent-bg);
+}
+
+/* Navigation items */
+.nav-item {
+    padding: 12px 16px;
+    margin: 4px 0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--text-secondary);
+    text-decoration: none;
+}
+
+.nav-item:hover {
+    background-color: var(--accent-bg);
+    color: var(--text-primary);
+    transform: translateX(4px);
+}
+
+.nav-item.active {
+    background-color: var(--accent-color);
+    color: white;
+    font-weight: 600;
+}
+
+/* File upload styling */
+.upload-section {
+    background: linear-gradient(135deg, var(--secondary-bg) 0%, var(--accent-bg) 100%);
+    border: 2px dashed var(--accent-color);
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    margin: 1rem 0;
+    transition: all 0.3s ease;
+}
+
+.upload-section:hover {
+    border-color: var(--success-color);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(74, 158, 255, 0.2);
+}
+
+.upload-icon {
+    font-size: 3rem;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+.upload-text {
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.upload-subtext {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+/* Header styling */
+.main-header {
+    background: linear-gradient(135deg, var(--accent-color) 0%, #6c5ce7 100%);
+    padding: 2rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: white;
+}
+
+.sidebar-header {
+    background: linear-gradient(135deg, var(--accent-color) 0%, #6c5ce7 100%);
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    color: white;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+/* Step header styling */
+.step-header {
+    background: linear-gradient(135deg, var(--secondary-bg) 0%, var(--accent-bg) 100%);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border-left: 4px solid var(--accent-color);
+    margin-bottom: 1.5rem;
+}
+
+/* Card styling */
+.info-card {
+    background: var(--secondary-bg);
+    border: 1px solid var(--accent-bg);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+}
+
+.metric-card {
+    background: linear-gradient(135deg, var(--secondary-bg) 0%, var(--accent-bg) 100%);
+    border: 1px solid var(--accent-color);
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    margin: 0.5rem 0;
+    transition: transform 0.2s ease;
+}
+
+.metric-card:hover {
+    transform: translateY(-2px);
+}
+
+/* Button styling */
+.stButton > button {
+    background: linear-gradient(135deg, var(--accent-color) 0%, #6c5ce7 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.stButton > button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(74, 158, 255, 0.3);
+}
+
+/* Form styling */
+.stForm {
+    background: var(--secondary-bg);
+    border: 1px solid var(--accent-bg);
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+/* Selectbox and input styling */
+.stSelectbox > div > div {
+    background-color: var(--secondary-bg);
+    border: 1px solid var(--accent-bg);
+    border-radius: 4px;
+}
+
+.stNumberInput > div > div > input {
+    background-color: var(--secondary-bg);
+    border: 1px solid var(--accent-bg);
+    border-radius: 4px;
+    color: var(--text-primary);
+}
+
+/* Checkbox styling */
+.stCheckbox > label {
+    color: var(--text-primary);
+}
+
+/* Slider styling */
+.stSlider > div > div > div {
+    background-color: var(--accent-color);
+}
+
+/* Expander styling */
+.streamlit-expanderHeader {
+    background-color: var(--secondary-bg);
+    border: 1px solid var(--accent-bg);
+    border-radius: 4px;
+}
+
+/* Dataframe styling */
+.stDataFrame {
+    border: 1px solid var(--accent-bg);
+    border-radius: 4px;
+}
+
+/* Progress bar styling */
+.stProgress > div > div > div {
+    background-color: var(--accent-color);
+}
+
+/* Alert styling */
+.stAlert {
+    border-radius: 8px;
+    border: 1px solid var(--accent-bg);
+}
+
+/* Success alert */
+.stAlert[data-baseweb="notification"] {
+    background-color: var(--success-color);
+}
+
+/* Warning alert */
+.stAlert[data-baseweb="notification"][kind="warning"] {
+    background-color: var(--warning-color);
+}
+
+/* Error alert */
+.stAlert[data-baseweb="notification"][kind="error"] {
+    background-color: var(--error-color);
+}
+
+/* Spinner styling */
+.stSpinner > div {
+    border-top-color: var(--accent-color);
+}
+
+/* Metric styling */
+.metric-container {
+    background: var(--secondary-bg);
+    border: 1px solid var(--accent-bg);
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+}
+
+/* Table styling */
+table {
+    background-color: var(--secondary-bg);
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid var(--accent-bg);
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: var(--accent-bg);
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .main .block-container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    
+    .upload-section {
+        padding: 1rem;
+    }
+    
+    .main-header {
+        padding: 1rem;
+    }
+    
+    .step-header {
+        padding: 1rem;
+    }
+}
+
+/* Animation keyframes */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+    from { transform: translateX(-20px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* Apply animations */
+.step-header {
+    animation: fadeIn 0.5s ease-out;
+}
+
+.nav-item {
+    animation: slideIn 0.3s ease-out;
+}
+
+.metric-card {
+    animation: fadeIn 0.6s ease-out;
+}
