@@ -81,7 +81,7 @@ def load_custom_css():
         </style>
         """, unsafe_allow_html=True)
         
-        st.warning("⚠️ File styles.css tidak ditemukan. Menggunakan CSS fallback.")
+        st.warning("File styles.css tidak ditemukan. Menggunakan CSS fallback.")
 
 # ==================== BROWSER AUTO-OPEN ====================
 def get_available_port(start_port=8503):
@@ -99,9 +99,9 @@ def get_available_port(start_port=8503):
 def open_browser(port):
     time.sleep(2)
     url = f"http://localhost:{port}"
-    print(f"\n🌐 Aplikasi Deteksi Dini Alzheimer sedang berjalan di: {url}")
-    print(f"📱 Browser akan terbuka otomatis dalam 2 detik...")
-    print(f"🔗 Atau buka manual: {url}\n")
+    print(f"\nAplikasi Deteksi Dini Alzheimer sedang berjalan di: {url}")
+    print(f"Browser akan terbuka otomatis dalam 2 detik...")
+    print(f"Atau buka manual: {url}\n")
     webbrowser.open(url)
 
 # Auto-open browser (hanya sekali)
@@ -115,7 +115,7 @@ st.set_page_config(
     page_title="Alzheimer Detection System", 
     layout="wide",
     initial_sidebar_state="expanded",
-    page_icon="🧠"
+    page_icon=None
 )
 
 # Load custom CSS
@@ -137,15 +137,15 @@ if 'current_page' not in st.session_state:
 def create_navigation():
     """Create modern sidebar navigation"""
     with st.sidebar:
-        st.markdown('<div class="sidebar-header">🧠 Alzheimer Detection</div>', unsafe_allow_html=True)
+        st.markdown('<div class="sidebar-header">Alzheimer Detection by Kelompok 10</div>', unsafe_allow_html=True)
         
         # Navigation items
         nav_items = [
-            {"name": "Input Dataset", "icon": "📁", "key": "input"},
-            {"name": "Preprocess Data", "icon": "⚙️", "key": "preprocess"},
-            {"name": "Analisis Data", "icon": "📊", "key": "analysis"},
-            {"name": "Visualisasi Data", "icon": "📈", "key": "visualization"},
-            {"name": "Prediction", "icon": "🧪", "key": "prediction"}
+            {"name": "Input Dataset", "icon": "", "key": "input"},
+            {"name": "Preprocess Data", "icon": "", "key": "preprocess"},
+            {"name": "Analisis Data", "icon": "", "key": "analysis"},
+            {"name": "Visualisasi Data", "icon": "", "key": "visualization"},
+            {"name": "Prediction", "icon": "", "key": "prediction"}
         ]
         
         st.markdown("### Navigation")
@@ -154,7 +154,8 @@ def create_navigation():
             is_active = st.session_state.current_page == item["name"]
             active_class = "active" if is_active else ""
             
-            if st.button(f"{item['icon']} {item['name']}", key=item['key'], use_container_width=True):
+            button_text = f"{item['name']}" if item['icon'] else item['name']
+            if st.button(button_text, key=item['key'], use_container_width=True):
                 st.session_state.current_page = item["name"]
                 st.rerun()
         
@@ -163,7 +164,7 @@ def create_upload_section(title, description, file_key, file_types=['csv']):
     """Create modern file upload section"""
     st.markdown(f"""
     <div class="upload-section">
-        <div class="upload-icon">☁️</div>
+        <div class="upload-icon"></div>
         <div class="upload-text">{title}</div>
         <div class="upload-subtext">{description}</div>
     </div>
@@ -185,7 +186,7 @@ create_navigation()
 # Main header
 st.markdown("""
 <div class="main-header">
-    <h1 style="margin: 0; color: var(--text-primary);">🧠 Alzheimer Detection System</h1>
+    <h1 style="margin: 0; color: var(--text-primary);">Alzheimer Detection System</h1>
     <p style="margin: 0.5rem 0 0 0; color: var(--text-secondary); font-size: 1.1rem;">
         Advanced Machine Learning Pipeline for Early Alzheimer's Detection using SVM
     </p>
@@ -197,7 +198,7 @@ if st.session_state.current_page == "Input Dataset":
     # ==================== INPUT DATASET PAGE ====================
     st.markdown("""
     <div class="step-header">
-        <h1 style="margin: 0; color: var(--text-primary);">📁 Input Dataset</h1>
+        <h1 style="margin: 0; color: var(--text-primary);">Input Dataset</h1>
         <p style="margin: 0.5rem 0 0 0; color: var(--text-secondary);">
             Upload your CSV dataset to begin the Alzheimer detection analysis
         </p>
@@ -212,7 +213,7 @@ if st.session_state.current_page == "Input Dataset":
     with col1:
         st.markdown("""
         <div class="content-wrapper">
-            <h3 style="color: var(--accent-color); margin-top: 0;">📤 Upload Your Dataset</h3>
+            <h3 style="color: var(--accent-color); margin-top: 0;">Upload Your Dataset</h3>
         </div>
         """, unsafe_allow_html=True)
         
@@ -223,11 +224,11 @@ if st.session_state.current_page == "Input Dataset":
         )
         
         if uploaded_file:
-            with st.spinner('📤 Memuat dataset...'):
+            with st.spinner('Memuat dataset...'):
                 result = st.session_state.ml_engine.load_dataset(uploaded_file)
                 
                 if result['success']:
-                    st.success(f"✅ Dataset loaded successfully!")
+                    st.success(f"Dataset loaded successfully!")
                     st.session_state.dataset_loaded = True
                     df = result['data']
                     
@@ -236,26 +237,26 @@ if st.session_state.current_page == "Input Dataset":
                     # Dataset metrics in a clean layout
                     st.markdown("""
                     <div class="content-wrapper">
-                        <h4 style="color: var(--accent-color); margin-top: 0;">📊 Dataset Overview</h4>
+                        <h4 style="color: var(--accent-color); margin-top: 0;">Dataset Overview</h4>
                     </div>
                     """, unsafe_allow_html=True)
                     
                     metric_col1, metric_col2, metric_col3 = st.columns(3)
                     with metric_col1:
-                        st.metric("📋 Total Rows", f"{df.shape[0]:,}")
+                        st.metric("Total Rows", f"{df.shape[0]:,}")
                     with metric_col2:
-                        st.metric("📊 Total Columns", f"{df.shape[1]:,}")
+                        st.metric("Total Columns", f"{df.shape[1]:,}")
                     with metric_col3:
-                        st.metric("💾 File Size", f"{uploaded_file.size / 1024:.1f} KB")
+                        st.metric("File Size", f"{uploaded_file.size / 1024:.1f} KB")
                     
                     st.markdown('<div class="section-spacing"></div>', unsafe_allow_html=True)
                     
                     # Dataset preview with better organization
-                    with st.expander("🔍 **Dataset Preview** (First 10 rows)", expanded=True):
+                    with st.expander("**Dataset Preview** (First 10 rows)", expanded=True):
                         st.dataframe(df.head(10), use_container_width=True, height=300)
                     
                     # Column information in a separate expander
-                    with st.expander("📋 **Column Details**"):
+                    with st.expander("**Column Details**"):
                         col_info_df = pd.DataFrame({
                             'Column Name': df.columns,
                             'Data Type': df.dtypes.astype(str),
@@ -265,7 +266,7 @@ if st.session_state.current_page == "Input Dataset":
                         })
                         st.dataframe(col_info_df, use_container_width=True)
                 else:
-                    st.error(f"❌ Error loading dataset: {result['message']}")
+                    st.error(f"Error loading dataset: {result['message']}")
         
         # Show example structure when no file is uploaded
         if not uploaded_file:
@@ -273,7 +274,7 @@ if st.session_state.current_page == "Input Dataset":
             
             st.markdown("""
             <div class="content-wrapper">
-                <h4 style="color: var(--accent-color); margin-top: 0;">📝 Expected Dataset Format</h4>
+                <h4 style="color: var(--accent-color); margin-top: 0;">Expected Dataset Format</h4>
             </div>
             """, unsafe_allow_html=True)
             
@@ -324,19 +325,19 @@ if st.session_state.current_page == "Input Dataset":
     with col2:
         st.markdown("""
         <div class="content-wrapper">
-            <h3 style="color: var(--accent-color); margin-top: 0;">📋 Requirements</h3>
+            <h3 style="color: var(--accent-color); margin-top: 0;">Requirements</h3>
         </div>
         """, unsafe_allow_html=True)
         
         # File Requirements
         with st.container():
-            st.markdown("#### 📄 File Requirements")
+            st.markdown("#### File Requirements")
             st.write("• **Format:** CSV file only")
             st.write("• **Size:** Maximum 200MB")
             st.write("• **Encoding:** UTF-8 recommended")
             st.write("• **Rows:** Minimum 10 samples")
             
-            st.markdown("#### 📊 Required Columns")
+            st.markdown("#### Required Columns")
             st.write("• **Diagnosis** - Target variable")
             st.write("• **MMSE** - Cognitive score")
             st.write("• **ADL** - Daily living activities")
@@ -348,32 +349,32 @@ if st.session_state.current_page == "Input Dataset":
         # Action buttons with better spacing
         st.markdown("""
         <div class="content-wrapper">
-            <h3 style="color: var(--accent-color); margin-top: 0;">🎯 Next Steps</h3>
+            <h3 style="color: var(--accent-color); margin-top: 0;">Next Steps</h3>
         </div>
         """, unsafe_allow_html=True)
         
         if st.session_state.dataset_loaded:
-            st.success("✅ **Dataset Ready** - Your dataset has been loaded successfully")
+            st.success("**Dataset Ready** - Your dataset has been loaded successfully")
             
-            if st.button("➡️ **Continue to Preprocessing**", type="primary", use_container_width=True):
+            if st.button("**Continue to Preprocessing**", type="primary", use_container_width=True):
                 st.session_state.current_page = "Preprocess Data"
                 st.rerun()
         else:
-            st.info("⏳ **Waiting for Dataset** - Please upload your CSV file to continue")
-            st.button("📤 **Upload Dataset First**", disabled=True, use_container_width=True)
+            st.info("**Waiting for Dataset** - Please upload your CSV file to continue")
+            st.button("**Upload Dataset First**", disabled=True, use_container_width=True)
 
 elif st.session_state.current_page == "Preprocess Data":
     # ==================== PREPROCESS DATA PAGE ====================
     if not st.session_state.dataset_loaded:
-        st.warning("⚠️ **Dataset Required** - Please upload a dataset first before proceeding to preprocessing.")
+        st.warning("**Dataset Required** - Please upload a dataset first before proceeding to preprocessing.")
         
-        if st.button("← **Back to Input Dataset**", use_container_width=True):
+        if st.button("**Back to Input Dataset**", use_container_width=True):
             st.session_state.current_page = "Input Dataset"
             st.rerun()
     else:
         st.markdown("""
         <div class="step-header">
-            <h1 style="margin: 0; color: var(--text-primary);">⚙️ Data Preprocessing</h1>
+            <h1 style="margin: 0; color: var(--text-primary);">Data Preprocessing</h1>
             <p style="margin: 0.5rem 0 0 0; color: var(--text-secondary);">
                 Feature selection and data preprocessing for machine learning
             </p>
@@ -388,7 +389,7 @@ elif st.session_state.current_page == "Preprocess Data":
         col1, col2 = st.columns([2, 1], gap="large")
         
         with col1:
-            st.markdown("### 🎯 Feature Selection")
+            st.markdown("### Feature Selection")
             
             # Fitur yang ditentukan sistem
             target_col = 'Diagnosis'
@@ -404,16 +405,16 @@ elif st.session_state.current_page == "Preprocess Data":
                     missing_cols.append(f"Feature: {feature}")
             
             if missing_cols:
-                st.error("❌ **Required columns not found in dataset:**")
+                st.error("**Required columns not found in dataset:**")
                 for col in missing_cols:
                     st.write(f"- {col}")
                 st.write("**Available columns in dataset:**")
                 st.write(list(df.columns))
             else:
-                st.success("✅ **All required columns found!**")
+                st.success("**All required columns found!**")
                 
                 # Target and Features info
-                st.markdown("#### 🎯 Target Variable")
+                st.markdown("#### Target Variable")
                 st.info(f"**{target_col}** - Alzheimer diagnosis labels")
                 if target_col in df.columns:
                     target_info = df[target_col].value_counts()
@@ -423,32 +424,32 @@ elif st.session_state.current_page == "Preprocess Data":
                     with col_b:
                         st.metric("Total Samples", target_info.sum())
                 
-                st.markdown("#### 🧠 Training Features")
+                st.markdown("#### Training Features")
                 for i, feature in enumerate(selected_features, 1):
                     if feature in df.columns:
-                        st.write(f"{i}. ✅ **{feature}**")
+                        st.write(f"{i}. **{feature}**")
                     else:
-                        st.write(f"{i}. ❌ **{feature}** (missing)")
+                        st.write(f"{i}. **{feature}** (missing)")
                 
                 # Confirm button
-                if st.button("🔄 **Confirm Feature Selection**", type="primary", use_container_width=True):
+                if st.button("**Confirm Feature Selection**", type="primary", use_container_width=True):
                     available_features = [f for f in selected_features if f in df.columns]
                     
                     if len(available_features) >= 1:
-                        with st.spinner('🔄 Processing selected features...'):
+                        with st.spinner('Processing selected features...'):
                             result = st.session_state.ml_engine.select_features(target_col, available_features)
                             
                             if result['success']:
-                                st.success(f"✅ {result['message']}")
+                                st.success(f"{result['message']}")
                                 st.session_state.features_selected = True
                                 st.rerun()
                             else:
-                                st.error(f"❌ {result['message']}")
+                                st.error(f"{result['message']}")
                     else:
-                        st.error("❌ No valid features available for training.")
+                        st.error("No valid features available for training.")
         
         with col2:
-            st.markdown("### 📊 Data Overview")
+            st.markdown("### Data Overview")
             
             if st.session_state.features_selected:
                 # Get descriptive stats
@@ -480,7 +481,7 @@ elif st.session_state.current_page == "Preprocess Data":
         # Preprocessing Pipeline Section
         if st.session_state.features_selected:
             st.markdown("---")
-            st.markdown("### ⚙️ Preprocessing Pipeline")
+            st.markdown("### Preprocessing Pipeline")
             
             col1, col2 = st.columns([2, 1])
             
@@ -489,15 +490,15 @@ elif st.session_state.current_page == "Preprocess Data":
                 numeric_impute = st.selectbox("Numeric imputation strategy", ['median', 'mean', 'most_frequent'])
                 encode_categoricals = st.checkbox("Encode categorical features", value=True)
                 
-                if st.button("🔧 **Build Preprocessing Pipeline**", use_container_width=True):
-                    with st.spinner('🔄 Building preprocessing pipeline...'):
+                if st.button("**Build Preprocessing Pipeline**", use_container_width=True):
+                    with st.spinner('Building preprocessing pipeline...'):
                         prep_result = st.session_state.ml_engine.build_preprocessing_pipeline(
                             numeric_impute=numeric_impute,
                             encode_categoricals=encode_categoricals
                         )
                         
                         if prep_result['success']:
-                            st.success(f"✅ {prep_result['message']}")
+                            st.success(f"{prep_result['message']}")
                             
                             # Handle different data types for features
                             numeric_count = prep_result.get('numeric_features', 0)
@@ -511,25 +512,25 @@ elif st.session_state.current_page == "Preprocess Data":
                             st.write(f"• Numeric features: {numeric_count}")
                             st.write(f"• Categorical features: {categorical_count}")
                         else:
-                            st.error(f"❌ {prep_result['message']}")
+                            st.error(f"{prep_result['message']}")
             
             with col2:
                 st.markdown("#### Next Step")
-                if st.button("➡️ **Proceed to Analysis**", type="primary", use_container_width=True):
+                if st.button("**Proceed to Analysis**", type="primary", use_container_width=True):
                     st.session_state.current_page = "Analisis Data"
                     st.rerun()
 
 elif st.session_state.current_page == "Analisis Data":
     # ==================== ANALISIS DATA PAGE ====================
     if not st.session_state.features_selected:
-        st.warning("⚠️ **Preprocessing Required** - Please complete preprocessing first.")
-        if st.button("← **Back to Preprocessing**", use_container_width=True):
+        st.warning("**Preprocessing Required** - Please complete preprocessing first.")
+        if st.button("**Back to Preprocessing**", use_container_width=True):
             st.session_state.current_page = "Preprocess Data"
             st.rerun()
     else:
         st.markdown("""
         <div class="step-header">
-            <h1 style="margin: 0; color: var(--text-primary);">📊 Data Analysis & Training</h1>
+            <h1 style="margin: 0; color: var(--text-primary);">Data Analysis & Training</h1>
             <p style="margin: 0.5rem 0 0 0; color: var(--text-secondary);">
                 Configure and train the SVM model for Alzheimer detection
             </p>
@@ -542,7 +543,7 @@ elif st.session_state.current_page == "Analisis Data":
         col1, col2 = st.columns([2, 1], gap="large")
         
         with col1:
-            st.markdown("### 🚀 Training Configuration")
+            st.markdown("### Training Configuration")
             
             # Training parameters in organized sections
             st.markdown("#### Model Parameters")
@@ -558,15 +559,15 @@ elif st.session_state.current_page == "Analisis Data":
             
             # Data Processing Steps
             st.markdown("---")
-            st.markdown("### 📊 Data Processing")
+            st.markdown("### Data Processing")
             
-            if st.button("🔄 **Step 1: Encode Target & Split Data**", use_container_width=True):
-                with st.spinner('🔄 Encoding target and splitting data...'):
+            if st.button("**Step 1: Encode Target & Split Data**", use_container_width=True):
+                with st.spinner('Encoding target and splitting data...'):
                     # Encode target
                     encode_result = st.session_state.ml_engine.encode_target_labels()
                     
                     if encode_result['success']:
-                        st.success(f"✅ Target encoding completed")
+                        st.success(f"Target encoding completed")
                         
                         # Train-test split
                         split_result = st.session_state.ml_engine.train_test_split_data(
@@ -575,7 +576,7 @@ elif st.session_state.current_page == "Analisis Data":
                         )
                         
                         if split_result['success']:
-                            st.success(f"✅ Data split completed")
+                            st.success(f"Data split completed")
                             
                             # Check class distribution
                             dist_result = st.session_state.ml_engine.check_class_distribution()
@@ -594,20 +595,20 @@ elif st.session_state.current_page == "Analisis Data":
                                     for key, value in dist_result['test_distribution'].items():
                                         st.write(f"• {key}: {value}")
                         else:
-                            st.error(f"❌ {split_result['message']}")
+                            st.error(f"{split_result['message']}")
                     else:
-                        st.error(f"❌ {encode_result['message']}")
+                        st.error(f"{encode_result['message']}")
             
             st.markdown("---")
-            st.markdown("### 🤖 Model Training")
+            st.markdown("### Model Training")
             
-            if st.button("🚀 **Step 2: Train SVM Model**", type="primary", use_container_width=True):
-                with st.spinner('🔄 Creating SVM pipeline and training model...'):
+            if st.button("**Step 2: Train SVM Model**", type="primary", use_container_width=True):
+                with st.spinner('Creating SVM pipeline and training model...'):
                     # Create SVM pipeline
                     pipeline_result = st.session_state.ml_engine.create_svm_pipeline()
                     
                     if pipeline_result['success']:
-                        st.success(f"✅ SVM pipeline created")
+                        st.success(f"SVM pipeline created")
                         
                         # Train model
                         train_result = st.session_state.ml_engine.train_model_with_gridsearch(
@@ -616,22 +617,22 @@ elif st.session_state.current_page == "Analisis Data":
                         )
                         
                         if train_result['success']:
-                            st.success(f"✅ Model training completed!")
+                            st.success(f"Model training completed!")
                             
                             if train_result['best_params']:
-                                with st.expander("🎯 **Best Parameters (GridSearch)**"):
+                                with st.expander("**Best Parameters (GridSearch)**"):
                                     for param, value in train_result['best_params'].items():
                                         st.write(f"• **{param}**: {value}")
                             
                             st.session_state.model_trained = True
                             st.balloons()
                         else:
-                            st.error(f"❌ {train_result['message']}")
+                            st.error(f"{train_result['message']}")
                     else:
-                        st.error(f"❌ {pipeline_result['message']}")
+                        st.error(f"{pipeline_result['message']}")
         
         with col2:
-            st.markdown("### 📈 Data Insights")
+            st.markdown("### Data Insights")
             
             # Visualization options
             show_corr = st.checkbox("Show correlation matrix")
@@ -668,9 +669,9 @@ elif st.session_state.current_page == "Analisis Data":
             
             # Navigation
             st.markdown("---")
-            st.markdown("### 🎯 Next Step")
+            st.markdown("### Next Step")
             if st.session_state.model_trained:
-                if st.button("➡️ **View Results**", type="primary", use_container_width=True):
+                if st.button("**View Results**", type="primary", use_container_width=True):
                     st.session_state.current_page = "Visualisasi Data"
                     st.rerun()
             else:
@@ -679,14 +680,14 @@ elif st.session_state.current_page == "Analisis Data":
 elif st.session_state.current_page == "Visualisasi Data":
     # ==================== VISUALISASI DATA PAGE ====================
     if not st.session_state.model_trained:
-        st.warning("⚠️ **Model Training Required** - Please complete model training first.")
-        if st.button("← **Back to Analysis**", use_container_width=True):
+        st.warning("**Model Training Required** - Please complete model training first.")
+        if st.button("**Back to Analysis**", use_container_width=True):
             st.session_state.current_page = "Analisis Data"
             st.rerun()
     else:
         st.markdown("""
         <div class="step-header">
-            <h1 style="margin: 0; color: var(--text-primary);">📈 Results & Visualization</h1>
+            <h1 style="margin: 0; color: var(--text-primary);">Results & Visualization</h1>
             <p style="margin: 0.5rem 0 0 0; color: var(--text-secondary);">
                 Model performance evaluation and prediction results
             </p>
@@ -696,7 +697,7 @@ elif st.session_state.current_page == "Visualisasi Data":
         st.markdown('<div class="section-spacing"></div>', unsafe_allow_html=True)
         
         # Model Evaluation Results
-        st.markdown("### 📊 Model Performance")
+        st.markdown("### Model Performance")
         
         # Predict and evaluate
         eval_result = st.session_state.ml_engine.predict_and_evaluate()
@@ -706,23 +707,23 @@ elif st.session_state.current_page == "Visualisasi Data":
             metric_col1, metric_col2, metric_col3, metric_col4 = st.columns(4)
             
             with metric_col1:
-                st.metric("🎯 Accuracy", f"{eval_result['accuracy']:.3f}")
+                st.metric("Accuracy", f"{eval_result['accuracy']:.3f}")
             
             with metric_col2:
                 report = eval_result['classification_report']
                 f1_score = report['weighted avg']['f1-score'] if 'weighted avg' in report else 0
-                st.metric("📊 F1-Score", f"{f1_score:.3f}")
+                st.metric("F1-Score", f"{f1_score:.3f}")
             
             with metric_col3:
                 auc_score = eval_result['roc_data']['auc'] if eval_result['roc_data'] else 0
-                st.metric("📈 AUC Score", f"{auc_score:.3f}")
+                st.metric("AUC Score", f"{auc_score:.3f}")
             
             with metric_col4:
-                st.metric("🏷️ Classes", len(eval_result['labels']))
+                st.metric("Classes", len(eval_result['labels']))
             
             # Visualizations
             st.markdown("---")
-            st.markdown("### 📈 Model Visualizations")
+            st.markdown("### Model Visualizations")
             
             viz_col1, viz_col2 = st.columns(2)
             
@@ -744,28 +745,28 @@ elif st.session_state.current_page == "Visualisasi Data":
                     st.info('ROC Curve only available for binary classification')
             
             # Classification Report
-            with st.expander("📊 **Detailed Classification Report**"):
+            with st.expander("**Detailed Classification Report**"):
                 report_df = pd.DataFrame(eval_result['classification_report']).transpose()
                 st.dataframe(report_df, use_container_width=True)
         
         # Feature Importance
         st.markdown("---")
-        st.markdown("### 🔬 Feature Importance")
+        st.markdown("### Feature Importance")
         
         importance_col1, importance_col2 = st.columns([3, 1])
         
         with importance_col1:
-            if st.button("📈 **Calculate Feature Importance**", use_container_width=True):
-                with st.spinner('🔍 Calculating feature importance...'):
+            if st.button("**Calculate Feature Importance**", use_container_width=True):
+                with st.spinner('Calculating feature importance...'):
                     imp_result = st.session_state.ml_engine.calculate_feature_importance()
                     
                     if imp_result['success']:
-                        st.success(f"✅ Feature importance calculated")
+                        st.success(f"Feature importance calculated")
                         
                         imp_fig = create_feature_importance_plot(imp_result['importance_df'])
                         st.plotly_chart(imp_fig, use_container_width=True)
                     else:
-                        st.warning(f"⚠️ {imp_result['message']}")
+                        st.warning(f"{imp_result['message']}")
         
         with importance_col2:
             if 'imp_result' in locals() and imp_result['success']:
@@ -774,26 +775,26 @@ elif st.session_state.current_page == "Visualisasi Data":
         
         # Export Results
         st.markdown("---")
-        st.markdown("### 📥 Export Results")
+        st.markdown("### Export Results")
         
         col1, col2 = st.columns(2)
         
         with col1:
-            if st.button("📋 **Generate Results**", use_container_width=True):
-                with st.spinner('📊 Creating prediction results...'):
+            if st.button("**Generate Results**", use_container_width=True):
+                with st.spinner('Creating prediction results...'):
                     pred_result = st.session_state.ml_engine.create_prediction_results()
                     
                     if pred_result['success']:
-                        st.success(f"✅ Results generated successfully")
+                        st.success(f"Results generated successfully")
                         st.dataframe(pred_result['sample_preview'], use_container_width=True)
                     else:
-                        st.error(f"❌ {pred_result['message']}")
+                        st.error(f"{pred_result['message']}")
         
         with col2:
             if 'pred_result' in locals() and pred_result['success']:
                 csv_data = download_csv(pred_result['results_df'], 'alzheimer_predictions.csv')
                 st.download_button(
-                    '📄 **Download CSV**',
+                    '**Download CSV**',
                     data=csv_data,
                     file_name='alzheimer_predictions.csv',
                     mime='text/csv',
@@ -802,21 +803,21 @@ elif st.session_state.current_page == "Visualisasi Data":
             
             # Navigation to Prediction
             st.markdown("#### Next Step")
-            if st.button("➡️ **Make Predictions**", type="primary", use_container_width=True):
+            if st.button("**Make Predictions**", type="primary", use_container_width=True):
                 st.session_state.current_page = "Prediction"
                 st.rerun()
 
 elif st.session_state.current_page == "Prediction":
     # ==================== PREDICTION PAGE ====================
     if not st.session_state.model_trained:
-        st.warning("⚠️ **Model Training Required** - Please complete model training first.")
-        if st.button("← **Back to Analysis**", use_container_width=True):
+        st.warning("**Model Training Required** - Please complete model training first.")
+        if st.button("**Back to Analysis**", use_container_width=True):
             st.session_state.current_page = "Analisis Data"
             st.rerun()
     else:
         st.markdown("""
         <div class="step-header">
-            <h1 style="margin: 0; color: var(--text-primary);">🧪 Prediction Interface</h1>
+            <h1 style="margin: 0; color: var(--text-primary);">Prediction Interface</h1>
             <p style="margin: 0.5rem 0 0 0; color: var(--text-secondary);">
                 Enter patient data to predict Alzheimer's disease risk
             </p>
@@ -826,13 +827,13 @@ elif st.session_state.current_page == "Prediction":
         st.markdown('<div class="section-spacing"></div>', unsafe_allow_html=True)
         
         # Instructions
-        st.info("📋 **Instructions:** Enter the feature values below to get an Alzheimer's risk prediction with confidence score.")
+        st.info("**Instructions:** Enter the feature values below to get an Alzheimer's risk prediction with confidence score.")
         
         # Main prediction interface
         col1, col2 = st.columns([2, 1], gap="large")
         
         with col1:
-            st.markdown("### 📝 Patient Data Input")
+            st.markdown("### Patient Data Input")
             
             # Prediction Form
             with st.form('prediction_form'):
@@ -881,10 +882,10 @@ elif st.session_state.current_page == "Prediction":
                     input_data['AlcoholConsumption'] = alcohol
                 
                 # Prediction button
-                submit_prediction = st.form_submit_button('🔮 **Analyze Risk**', type="primary", use_container_width=True)
+                submit_prediction = st.form_submit_button('**Analyze Risk**', type="primary", use_container_width=True)
                 
                 if submit_prediction:
-                    with st.spinner('🔄 Analyzing patient data...'):
+                    with st.spinner('Analyzing patient data...'):
                         pred_result = st.session_state.ml_engine.predict_single_sample(input_data)
                         
                         if pred_result['success']:
@@ -893,19 +894,19 @@ elif st.session_state.current_page == "Prediction":
                             
                             # Show prediction results
                             st.markdown("---")
-                            st.markdown("### 🎯 Risk Assessment Results")
+                            st.markdown("### Risk Assessment Results")
                             
                             # Main result
                             if "Positif" in str(diagnosis) or "1" in str(diagnosis):
-                                st.error(f"⚠️ **HIGH RISK** - {diagnosis}")
+                                st.error(f"**HIGH RISK** - {diagnosis}")
                             else:
-                                st.success(f"✅ **LOW RISK** - {diagnosis}")
+                                st.success(f"**LOW RISK** - {diagnosis}")
                             
                             # Confidence and probabilities
                             result_col1, result_col2 = st.columns(2)
                             
                             with result_col1:
-                                st.metric("🎯 Confidence Level", f"{confidence:.1f}%")
+                                st.metric("Confidence Level", f"{confidence:.1f}%")
                             
                             with result_col2:
                                 if pred_result['probabilities']:
@@ -916,33 +917,33 @@ elif st.session_state.current_page == "Prediction":
                                         st.write(f"• **{label}**: {prob:.1f}%")
                                         st.progress(prob / 100.0)
                         else:
-                            st.error(f"❌ {pred_result['message']}")
+                            st.error(f"{pred_result['message']}")
         
         with col2:
-            st.markdown("### 📊 Feature Guide")
+            st.markdown("### Feature Guide")
             
             # Feature descriptions
             with st.container():
-                st.markdown("#### 🧠 MMSE (0-30)")
+                st.markdown("#### MMSE (0-30)")
                 st.write("Mini-Mental State Examination - Cognitive assessment")
                 st.caption("Lower scores indicate cognitive impairment")
                 
-                st.markdown("#### 🏠 ADL (0-10)")
+                st.markdown("#### ADL (0-10)")
                 st.write("Activities of Daily Living - Independence measure")
                 st.caption("Lower scores indicate more dependency")
                 
-                st.markdown("#### ⚙️ Functional Assessment (0-10)")
+                st.markdown("#### Functional Assessment (0-10)")
                 st.write("Overall functional capability assessment")
                 st.caption("Lower scores indicate functional decline")
                 
-                st.markdown("#### 🍷 Alcohol Consumption (0-20)")
+                st.markdown("#### Alcohol Consumption (0-20)")
                 st.write("Weekly alcohol consumption in units")
                 st.caption("Higher values may indicate risk factors")
             
             # Dataset reference values
             if st.session_state.dataset_loaded:
                 st.markdown("---")
-                st.markdown("#### 📈 Dataset Reference")
+                st.markdown("#### Dataset Reference")
                 
                 df = st.session_state.ml_engine.df
                 
@@ -960,10 +961,10 @@ elif st.session_state.current_page == "Prediction":
 st.markdown("---")
 st.markdown("""
 <div class="info-card">
-    <h3 style="margin-top: 0;">📚 Machine Learning Pipeline Overview</h3>
+    <h3 style="margin-top: 0;">Machine Learning Pipeline Overview</h3>
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem;">
         <div>
-            <h4 style="color: var(--accent-color); margin-bottom: 0.5rem;">🔄 Data Processing</h4>
+            <h4 style="color: var(--accent-color); margin-bottom: 0.5rem;">Data Processing</h4>
             <ul style="color: var(--text-secondary); font-size: 0.9rem;">
                 <li>Dataset Upload & Validation</li>
                 <li>Feature Selection & Engineering</li>
@@ -972,7 +973,7 @@ st.markdown("""
             </ul>
         </div>
         <div>
-            <h4 style="color: var(--accent-color); margin-bottom: 0.5rem;">🤖 Model Training</h4>
+            <h4 style="color: var(--accent-color); margin-bottom: 0.5rem;">Model Training</h4>
             <ul style="color: var(--text-secondary); font-size: 0.9rem;">
                 <li>SVM Pipeline with GridSearch</li>
                 <li>Hyperparameter Optimization</li>
@@ -981,7 +982,7 @@ st.markdown("""
             </ul>
         </div>
         <div>
-            <h4 style="color: var(--accent-color); margin-bottom: 0.5rem;">📊 Analysis & Results</h4>
+            <h4 style="color: var(--accent-color); margin-bottom: 0.5rem;">Analysis & Results</h4>
             <ul style="color: var(--text-secondary); font-size: 0.9rem;">
                 <li>Confusion Matrix & ROC Curve</li>
                 <li>Feature Importance Analysis</li>
@@ -995,7 +996,7 @@ st.markdown("""
 
 st.markdown("""
 <div style="text-align: center; margin-top: 2rem; color: var(--text-secondary);">
-    <p>🧠 <strong>Alzheimer Detection System</strong> - Advanced ML Pipeline for Early Detection</p>
+    <p><strong>Alzheimer Detection System</strong> - Advanced ML Pipeline for Early Detection</p>
     <p style="font-size: 0.8rem;">Built with Streamlit • Powered by scikit-learn • Enhanced with modern UI/UX</p>
 </div>
 """, unsafe_allow_html=True)
