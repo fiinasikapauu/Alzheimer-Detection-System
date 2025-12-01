@@ -131,7 +131,7 @@ if 'features_selected' not in st.session_state:
 if 'model_trained' not in st.session_state:
     st.session_state.model_trained = False
 if 'current_page' not in st.session_state:
-    st.session_state.current_page = "Input Dataset"
+    st.session_state.current_page = "Home"
 
 # Navigation function
 def create_navigation():
@@ -141,6 +141,7 @@ def create_navigation():
         
         # Navigation items
         nav_items = [
+            {"name": "Home", "icon": "", "key": "home"},
             {"name": "Input Dataset", "icon": "", "key": "input"},
             {"name": "Preprocess Data", "icon": "", "key": "preprocess"},
             {"name": "Analisis Data", "icon": "", "key": "analysis"},
@@ -194,7 +195,182 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Page routing based on navigation
-if st.session_state.current_page == "Input Dataset":
+if st.session_state.current_page == "Home":
+    # ==================== HOME PAGE ====================
+    st.markdown("""
+    <div class="step-header">
+        <h1 style="margin: 0; color: var(--text-primary);">Welcome to Alzheimer Detection System</h1>
+        <p style="margin: 0.5rem 0 0 0; color: var(--text-secondary);">
+            Advanced Machine Learning Pipeline for Early Alzheimer's Disease Detection using SVM
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    st.markdown('<div class="section-spacing"></div>', unsafe_allow_html=True)
+    
+    # Hero Section
+    st.markdown("""
+    <div class="content-wrapper" style="text-align: center; padding: 3rem 2rem;">
+        <h2 style="color: var(--accent-color); margin-bottom: 1rem;">Deteksi Dini Alzheimer dengan Teknologi Machine Learning</h2>
+        <p style="color: var(--text-secondary); font-size: 1.1rem; line-height: 1.8; max-width: 800px; margin: 0 auto;">
+            Sistem ini menggunakan algoritma Support Vector Machine (SVM) untuk menganalisis data pasien 
+            dan memberikan prediksi risiko Alzheimer dengan akurasi tinggi. Aplikasi ini dirancang untuk 
+            membantu tenaga medis dalam melakukan deteksi dini penyakit Alzheimer.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    st.markdown('<div class="section-spacing"></div>', unsafe_allow_html=True)
+    
+    # Features Section
+    st.markdown("""
+    <div class="content-wrapper">
+        <h2 style="color: var(--text-primary); margin-bottom: 2rem; text-align: center;">Fitur Utama</h2>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Features Grid
+    col1, col2, col3 = st.columns(3, gap="large")
+    
+    with col1:
+        st.markdown("""
+        <div class="info-card" style="text-align: center; padding: 2rem 1.5rem;">
+            <h3 style="color: var(--accent-color); margin-bottom: 1rem;">Data Processing</h3>
+            <ul style="text-align: left; color: var(--text-secondary); line-height: 2;">
+                <li>Upload & Validasi Dataset</li>
+                <li>Feature Selection</li>
+                <li>Data Preprocessing</li>
+                <li>Train-Test Split</li>
+            </ul>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with col2:
+        st.markdown("""
+        <div class="info-card" style="text-align: center; padding: 2rem 1.5rem;">
+            <h3 style="color: var(--accent-color); margin-bottom: 1rem;">Machine Learning</h3>
+            <ul style="text-align: left; color: var(--text-secondary); line-height: 2;">
+                <li>SVM Pipeline</li>
+                <li>GridSearch Optimization</li>
+                <li>Cross-Validation</li>
+                <li>Model Evaluation</li>
+            </ul>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with col3:
+        st.markdown("""
+        <div class="info-card" style="text-align: center; padding: 2rem 1.5rem;">
+            <h3 style="color: var(--accent-color); margin-bottom: 1rem;">Visualization & Prediction</h3>
+            <ul style="text-align: left; color: var(--text-secondary); line-height: 2;">
+                <li>Confusion Matrix</li>
+                <li>ROC Curve Analysis</li>
+                <li>Feature Importance</li>
+                <li>Real-time Prediction</li>
+            </ul>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    st.markdown('<div class="section-spacing"></div>', unsafe_allow_html=True)
+    
+    # Team Section
+    st.markdown("""
+    <div class="content-wrapper">
+        <h2 style="color: var(--text-primary); margin-bottom: 2rem; text-align: center;">Tim Pengembang</h2>
+        <p style="color: var(--text-secondary); text-align: center; margin-bottom: 2rem;">
+            Kelompok 10 - Sistem Deteksi Dini Alzheimer
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Team Members
+    team_col1, team_col2, team_col3 = st.columns(3, gap="large")
+    
+    with team_col1:
+        st.markdown("""
+        <div class="info-card" style="text-align: center; padding: 2rem 1.5rem;">
+            <h3 style="color: var(--accent-color); margin-bottom: 0.5rem;">Fadhilla Firma</h3>
+            <p style="color: var(--text-secondary); font-size: 0.95rem; margin: 0;">NIM: 2311522031</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with team_col2:
+        st.markdown("""
+        <div class="info-card" style="text-align: center; padding: 2rem 1.5rem;">
+            <h3 style="color: var(--accent-color); margin-bottom: 0.5rem;">Muhammad Farid Junaidi</h3>
+            <p style="color: var(--text-secondary); font-size: 0.95rem; margin: 0;">NIM: 2311523027</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with team_col3:
+        st.markdown("""
+        <div class="info-card" style="text-align: center; padding: 2rem 1.5rem;">
+            <h3 style="color: var(--accent-color); margin-bottom: 0.5rem;">Rafi Yandra Maulana Fauzi</h3>
+            <p style="color: var(--text-secondary); font-size: 0.95rem; margin: 0;">NIM: 2311523041</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    st.markdown('<div class="section-spacing"></div>', unsafe_allow_html=True)
+    
+    # Getting Started Section
+    st.markdown("""
+    <div class="content-wrapper" style="text-align: center; padding: 2rem;">
+        <h2 style="color: var(--text-button); margin-bottom: 1rem;">Mulai Menggunakan Aplikasi</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 2rem;">
+            Ikuti langkah-langkah berikut untuk mulai menggunakan sistem deteksi Alzheimer
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Steps
+    steps_col1, steps_col2, steps_col3, steps_col4 = st.columns(4, gap="medium")
+    
+    with steps_col1:
+        st.markdown("""
+        <div style="text-align: center; padding: 1.5rem;">
+            <div style="width: 60px; height: 60px; background: var(--accent-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 1.5rem; font-weight: 700;">1</div>
+            <h4 style="color: var(--accent-color); margin-bottom: 0.5rem;">Input Dataset</h4>
+            <p style="color: var(--text-secondary); font-size: 0.9rem;">Upload file CSV berisi data pasien</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with steps_col2:
+        st.markdown("""
+        <div style="text-align: center; padding: 1.5rem;">
+            <div style="width: 60px; height: 60px; background: var(--accent-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 1.5rem; font-weight: 700;">2</div>
+            <h4 style="color: var(--accent-color); margin-bottom: 0.5rem;">Preprocess Data</h4>
+            <p style="color: var(--text-secondary); font-size: 0.9rem;">Pilih fitur dan lakukan preprocessing</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with steps_col3:
+        st.markdown("""
+        <div style="text-align: center; padding: 1.5rem;">
+            <div style="width: 60px; height: 60px; background: var(--accent-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 1.5rem; font-weight: 700;">3</div>
+            <h4 style="color: var(--accent-color); margin-bottom: 0.5rem;">Train Model</h4>
+            <p style="color: var(--text-secondary); font-size: 0.9rem;">Latih model SVM dengan data</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with steps_col4:
+        st.markdown("""
+        <div style="text-align: center; padding: 1.5rem;">
+            <div style="width: 60px; height: 60px; background: var(--accent-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 1.5rem; font-weight: 700;">4</div>
+            <h4 style="color: var(--accent-color); margin-bottom: 0.5rem;">Predict</h4>
+            <p style="color: var(--text-secondary); font-size: 0.9rem;">Lakukan prediksi risiko Alzheimer</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    st.markdown('<div class="section-spacing"></div>', unsafe_allow_html=True)
+    
+    # CTA Button
+    col_cta1, col_cta2, col_cta3 = st.columns([1, 2, 1])
+    with col_cta2:
+        if st.button("**Mulai Menggunakan Aplikasi**", type="primary", use_container_width=True):
+            st.session_state.current_page = "Input Dataset"
+            st.rerun()
+
+elif st.session_state.current_page == "Input Dataset":
     # ==================== INPUT DATASET PAGE ====================
     st.markdown("""
     <div class="step-header">

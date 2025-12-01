@@ -8,6 +8,7 @@
     --card-bg: #ffffff;
     --text-primary: #0f172a;
     --text-secondary: #475569;
+    --text-button: #ffffff;
     --text-muted: #94a3b8;
     --accent-color: #1e3a8a;
     --accent-hover: #1e40af;
@@ -282,9 +283,9 @@ header {visibility: visible;}
 
 /* Button styling */
 .stButton > button {
-    background: var(--accent-color);
-    color: white !important;
-    border: none;
+    background: var(--accent-color) !important;
+    color: #ffffff !important;
+    border: none !important;
     border-radius: 10px;
     padding: 0.75rem 1.5rem;
     font-weight: 600;
@@ -293,25 +294,74 @@ header {visibility: visible;}
     letter-spacing: -0.01em;
 }
 
+.stButton > button,
+.stButton > button *,
+.stButton > button span {
+    color: #ffffff !important;
+}
+
 .stButton > button:hover {
-    background: var(--accent-hover);
+    background: var(--accent-hover) !important;
+    color: #ffffff !important;
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
 }
 
-.stButton > button:active {
-    transform: translateY(0);
+.stButton > button:hover *,
+.stButton > button:hover span {
+    color: #ffffff !important;
 }
 
-/* Primary button */
-.stButton > button[kind="primary"] {
-    background: var(--accent-color);
+.stButton > button:active {
+    transform: translateY(0);
+    color: #ffffff !important;
+}
+
+.stButton > button:active *,
+.stButton > button:active span {
+    color: #ffffff !important;
+}
+
+/* Primary button - More specific selectors */
+.stButton > button[kind="primary"],
+button[kind="primary"],
+.stButton button[kind="primary"] {
+    background: var(--accent-color) !important;
+    color: #ffffff !important;
     box-shadow: var(--shadow-accent);
 }
 
-.stButton > button[kind="primary"]:hover {
-    background: var(--accent-hover);
+.stButton > button[kind="primary"] *,
+.stButton > button[kind="primary"] span,
+button[kind="primary"] *,
+button[kind="primary"] span {
+    color: #ffffff !important;
+}
+
+.stButton > button[kind="primary"]:hover,
+button[kind="primary"]:hover {
+    background: var(--accent-hover) !important;
+    color: #ffffff !important;
     box-shadow: 0 6px 20px 0 rgba(30, 58, 138, 0.3);
+}
+
+.stButton > button[kind="primary"]:hover *,
+.stButton > button[kind="primary"]:hover span,
+button[kind="primary"]:hover *,
+button[kind="primary"]:hover span {
+    color: #ffffff !important;
+}
+
+.stButton > button[kind="primary"]:active,
+button[kind="primary"]:active {
+    color: #ffffff !important;
+}
+
+.stButton > button[kind="primary"]:active *,
+.stButton > button[kind="primary"]:active span,
+button[kind="primary"]:active *,
+button[kind="primary"]:active span {
+    color: #ffffff !important;
 }
 
 /* Secondary button */
@@ -732,4 +782,64 @@ div[data-baseweb="select"] {
 /* Expander content background */
 .streamlit-expanderContent {
     background-color: var(--card-bg);
+}
+
+/* Force white text on all buttons - Maximum specificity override */
+button[data-testid="baseButton-primary"],
+button[data-testid="baseButton-primary"] *,
+button[data-testid="baseButton-primary"] span,
+button[data-testid="baseButton-primary"] p,
+button[data-testid="baseButton-primary"] div,
+button[data-testid="baseButton-primary"] label {
+    color: #ffffff !important;
+}
+
+/* Additional button text color override - Very specific selectors */
+.stButton button,
+.stButton button p,
+.stButton button div,
+.stButton button span,
+.stButton button label,
+.stButton button strong {
+    color: #ffffff !important;
+}
+
+.stButton button[kind="primary"],
+.stButton button[kind="primary"] p,
+.stButton button[kind="primary"] div,
+.stButton button[kind="primary"] span,
+.stButton button[kind="primary"] *,
+.stButton button[kind="primary"] label,
+.stButton button[kind="primary"] strong {
+    color: #ffffff !important;
+}
+
+/* Streamlit specific button selectors */
+div[data-testid="stButton"] > button,
+div[data-testid="stButton"] > button *,
+div[data-testid="stButton"] > button span,
+div[data-testid="stButton"] > button p,
+div[data-testid="stButton"] > button strong,
+div[data-testid="stButton"] > button label {
+    color: #ffffff !important;
+}
+
+div[data-testid="stButton"] > button[kind="primary"],
+div[data-testid="stButton"] > button[kind="primary"] *,
+div[data-testid="stButton"] > button[kind="primary"] span,
+div[data-testid="stButton"] > button[kind="primary"] p,
+div[data-testid="stButton"] > button[kind="primary"] strong,
+div[data-testid="stButton"] > button[kind="primary"] label {
+    color: #ffffff !important;
+}
+
+/* Universal button text color - Catch all */
+button[kind="primary"],
+button[kind="primary"] *,
+button[kind="primary"] span,
+button[kind="primary"] p,
+button[kind="primary"] div,
+button[kind="primary"] strong,
+button[kind="primary"] label {
+    color: #ffffff !important;
 }
